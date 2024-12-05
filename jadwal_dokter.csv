@@ -1,0 +1,6 @@
+ID Dokter,Nama Dokter,Spesialisasi,Hari,Jam,Tersedia
+101,Dr. Andi,Umum,Senin,09.00-12.00,Ya
+102,Dr. Budi,Kardiologi,Selasa,10:00-13:00,Ya
+103,Dr. Citra,Neurologi,Rabu,14:00-17:00,Ya
+104,Dr. Dina,Dermatologi,Kamis,08:00-11:00,Tidak
+105,Dr. Eko,Pediatri,Jumat,15:00-18:00,Ya
