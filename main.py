@@ -100,7 +100,7 @@ def load_csv_data():
 try:
     queue = pd.read_csv('queue.csv')
 except FileNotFoundError:
-    queue = pd.DataFrame(columns=['Nama', 'Nik', 'gender', 'date', 'diagnosa', 'obat', 'ruangan'])
+    queue = pd.DataFrame(columns=['Nama', 'Nik', 'umur', 'date', 'diagnosa', 'obat', 'ruangan'])
 
 def clear_screen():
     os.system('cls')
@@ -164,6 +164,7 @@ def login(keyring_path='keyring.csv'):
                 main_menu()
             elif role == 'dokter':
                 dokter_menu(username)
+                
     except Exception as e:
         log_user_error(user_logger, f"Unexpected Error: {str(e)}")
     except Exception as e:
@@ -189,7 +190,7 @@ def show_main_menu():
     print("\n=== Sistem Informasi Kesehatan ===")
     print("1. Data Pasien")
     print("2. Jadwal Dokter")
-    print("3. Konsul dan Diagnosa")
+    print("3. Diagnosa")
     print("4. Ruang Rawat Inap")
     print("5. Resep Obat")
     print("6. Pembayaran")
@@ -205,7 +206,7 @@ def main_menu():
         elif key == '2':
             show_doctor_schedule()
         elif key == '3':
-            konsul_dan_diagnosa()
+            diagnosa()
         elif key == '4':
             menu_kamar()
         elif key == '5':
@@ -222,6 +223,8 @@ def main_menu():
 #fitur 1
 def data_pasien_menu():
     clear_screen()
+    df_queue = pd.read_csv("queue.csv")
+    print(df_queue)
     print("\n=== Data Pasien ===")
     print("1. Tambah Pasien")
     print("2. Hapus Pasien")
@@ -255,23 +258,24 @@ def antrian(logger):
                 print("NIK harus 16 digit.")
                 continue
 
-            gender = input("Gender (F/M): ").upper()
-            if gender not in ["F", "M"]:
-                print("Gender harus diisi dengan F atau M (kapital).")
+            try :
+                age = int(input("Umur: "))
+            except ValueError :
+                print("Umur harus berupa angka.")
 
             current_time = datetime.now()
             waktu = input("Waktu (MM-DD HH:MM) [default: sekarang]: ") or current_time.strftime("%m-%d %H:%M")
             log_user_action(logger, "Patient Added to Queue", {
                 "Name": Nama,
                 "NIK": NIK,
-                "Gender": gender,
+                "Umur" : age,
                 "Time": waktu
             })
 
             temp = pd.DataFrame({
                 'Nama': [Nama],
                 'Nik': [NIK],
-                'gender': [gender],
+                'umur': [age],
                 'date': [waktu],
                 'diagnosa': [np.nan],
                 'obat': [np.nan],
@@ -326,7 +330,7 @@ def show_remove_patient(logger):
         log_user_action(logger, "Patient Removed Successfully", {
             "Index": index_antrian,
             "Removed Patient Details": patient_to_remove
-         })
+        })
         queue.to_csv('queue.csv', index=False)
         print("Patient removed successfully")
         
@@ -371,10 +375,10 @@ def show_doctor_schedule(logger):
         log_user_action(logger, "doctor schedule not found")
     pause()
 
-def konsul_dan_diagnosa(logger):
+def diagnosa(logger):
     global queue
     clear_screen()
-    print("\n=== Konsul dan Diagnosa ===")
+    print("\n=== Diagnosa ===")
     print(queue[queue['diagnosa'].isna()])
     
     try:
@@ -604,15 +608,13 @@ def handle_payment():
         console.print("[bold green]Pembayaran ditanggung oleh BPJS.[/bold green]", justify="center")
     else:
         biaya_rawat = Prompt.ask("[yellow]Masukkan biaya rawat inap (0 jika tidak ada)[/yellow]", default="0")
-        biaya_dokter = Prompt.ask("[yellow]Masukkan biaya konsultasi dokter[/yellow]")
-        biaya_obat = Prompt.ask("[yellow]Masukkan biaya obat[/yellow]")
-        total = int(biaya_rawat) + int(biaya_dokter) + int(biaya_obat)
+        biaya_layanan = Prompt.ask("[yellow]Masukkan biaya obat[/yellow]")
+        total = int(biaya_rawat) + int(biaya_layanan)
 
         struk = (
             f"[bold yellow]--- STRUK PEMBAYARAN ---[/bold yellow]\n"
             f"[bold green]Biaya Rawat Inap  : Rp {biaya_rawat}[/bold green]\n"
-            f"[bold green]Biaya Dokter      : Rp {biaya_dokter}[/bold green]\n"
-            f"[bold green]Biaya Obat        : Rp {biaya_obat}[/bold green]\n"
+            f"[bold green]Biaya Obat        : Rp {biaya_layanan}[/bold green]\n"
             f"[bold white]Total            : Rp {total}[/bold white]"
         )
         console.print(Align.center(struk))
@@ -621,112 +623,186 @@ def handle_payment():
 #dokter
 def login_dokter(username):
     dokter = username
-    print(f"Selamat datang, dr. {dokter}!")
-    print("")
+    print(f"Selamat datang, dr. {dokter.capitalize()}!")
     return dokter
 
-def lihat_dan_edit_jadwal(id_dokter):
+def tambah_jadwal(dokter):
+    jadwal = pd.read_csv("jadwal_dokter.csv")
+
+    nama = (f"dr. {dokter.capitalize()}")
+
+    while True:
+        spesialis = input("Masukkan Spesialis: ").strip()
+        if spesialis:
+            break
+        print("Spesialis tidak boleh kosong. Silakan coba lagi.")
+
+    hari_valid = ["Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu", "Minggu"]
+    while True:
+        hari = input(f"Masukkan Hari (pilihan: {', '.join(hari_valid)}): ").capitalize()
+        if hari in hari_valid:
+            print("Hari tidak valid. Silakan masukkan hari yang benar.")
+            break
+
+    while True:
+        jam_masuk = input("Masukkan Jam Masuk: (format HH:MM) ")
+        if jam_masuk:
+            print("Jam masuk tidak boleh kosong. Silakan coba lagi.")
+            break
+    
+    while True:    
+        jam_keluar = input("Masukkan Jam Keluar: (format HH:MM) ")
+        if jam_keluar:
+            print("Spesialis tidak boleh kosong. Silakan coba lagi.")
+            break
+
+    temp = pd.DataFrame({
+        "Nama" : [nama],
+        "Spesialis" : [spesialis],
+        "Hari" : [hari],
+        "Jam" : [f"{jam_masuk}-{jam_keluar}"]})
+    
+    jadwal = pd.concat([jadwal, temp], ignore_index=False)
+    jadwal.to_csv("jadwal_dokter.csv", index=False)
+
+def lihat_dan_edit_jadwal(dokter):
     clear_screen()
     df_jadwal = pd.read_csv("jadwal_dokter.csv")
-    jadwal_dokter = df_jadwal[df_jadwal["ID Dokter"] == id_dokter]
+    jadwal_dokter = df_jadwal[df_jadwal["Nama Dokter"] == dokter]
     
-    if jadwal_dokter.empty:
-        print("Tidak ada jadwal untuk dokter ini.")
-    else:
-        print("\nJadwal Anda:")
-        print(jadwal_dokter.to_string(index=False))
+    while True:
+        if jadwal_dokter.empty:
+            print("Tidak ada jadwal untuk dokter ini.")
+            print("Apakah anda ingin menambahkan jadwal? (y/n)")
+            pilihan = getch()
+            if pilihan == "y":
+                tambah_jadwal()
+            elif pilihan == "n":
+                break
+        else :
+            print("\nJadwal Anda:")
+            print(jadwal_dokter.to_string(index=False))
 
-        edit = input("\nApakah Anda ingin mengedit jadwal? (y/n): ").lower()
-        if edit == "y":
-            id_jadwal = int(input("Masukkan ID Jadwal yang ingin diubah: "))
-            jadwal_baru = input("Masukkan jadwal baru: ")
-            df_jadwal.loc[df_jadwal["ID Dokter"] == id_dokter, "Jadwal"] = jadwal_baru
-            df_jadwal.to_csv("jadwal_dokter", index=False)
-            print("Jadwal berhasil diperbarui.")
-        else:
-            print("Jadwal tidak diubah.")
+            edit = input("\nApakah Anda ingin mengedit jadwal? (Y/N): ").lower()
+            if edit == "y":
+                id_jadwal = int(input("Masukkan ID Jadwal yang ingin diubah: "))
+                jadwal_baru = input("Masukkan jadwal baru: ")
+                df_jadwal.loc[df_jadwal["Nama Dokter"] == dokter, "Jadwal"] = jadwal_baru
+                df_jadwal.to_csv("jadwal_dokter.csv", index=False)
+                print("Jadwal berhasil diperbarui.")
+            else:
+                print("Jadwal tidak diubah.")
 
 def diagnosa_pasien():
     clear_screen()
-    df_pasien = pd.read_csv("pasien.csv")
-    nik_pasien = int(input("Masukkan NIK Pasien: "))
-    pasien = df_pasien[df_pasien["nik"] == nik_pasien]
-    
+    df_antrian = pd.read_csv("queue.csv")
+
+    try:
+        nik_pasien = int(input("Masukkan NIK Pasien: "))
+    except ValueError:
+        print("Masukkan NIK berupa angka.")
+        return
+
+    pasien = df_antrian[df_antrian["Nik"] == nik_pasien]
+
     if pasien.empty:
         print("Pasien tidak ditemukan.")
         return
     
-    print(f"\nData Pasien: {pasien.iloc[0]['name']}, Umur: {pasien.iloc[0]['age']}")
-
+    print(f"\nData Pasien: {pasien.iloc[0]['Nama']}, Umur: {pasien.iloc[0]['umur']}")
     diagnosa = input("Masukkan Diagnosa: ")
     tindakan = input("Masukkan Tindakan (Rawat Inap/Resep Obat): ").lower()
 
     df_diagnosa = pd.read_csv("data_diagnosa.csv")
+
     new_diagnosa = pd.DataFrame({
         "NIK Pasien": [nik_pasien],
-        "Diagnosa": [diagnosa],
+        "Diagnosa": [diagnosa.capitalize()],
         "Tindakan": [tindakan.capitalize()]
     })
     df_diagnosa = pd.concat([df_diagnosa, new_diagnosa], ignore_index=True)
     df_diagnosa.to_csv("data_diagnosa.csv", index=False)
 
-    print(f"Diagnosa untuk pasien {pasien.iloc[0]['name']} telah dicatat.")
+    print(f"Diagnosa untuk pasien {pasien.iloc[0]['Nama']} telah dicatat.")
 
     if tindakan == "rawat inap":
-        atur_rawat_inap()
+        atur_rawat_inap(nik_pasien)
     elif tindakan == "resep obat":
-        atur_resep_obat()
+        atur_resep_obat(nik_pasien)
     else:
         print("Tindakan tidak dikenali.")
+    return nik_pasien
 
-def atur_rawat_inap(nama_pasien):
+def atur_rawat_inap(nik_pasien):
     clear_screen()
     df_rawat_inap = pd.read_csv("data_kamar.csv")
+
     print("\nDaftar Kamar Rawat Inap:")
     print(df_rawat_inap.to_string(index=False))
     
-    nomor_kamar = int(input("\nMasukkan Nomor Kamar untuk rawat inap: "))
+    try:
+        nomor_kamar = int(input("\nMasukkan Nomor Kamar untuk rawat inap: "))
+    except ValueError:
+        print("Nomor kamar harus berupa angka.")
+        return
+
     kamar = df_rawat_inap[df_rawat_inap["Nomor Kamar"] == nomor_kamar]
-    
+
     if not kamar.empty:
-        indeks = kamar[0]
-        if kamar.at[indeks, "Status"] == "Kosong":
-            kamar.at[indeks, "Status"] = "Terisi"
-            kamar.at[indeks, "Nama Pasien"] = nama_pasien
-            kamar.to_csv("data_kamar.csv", index=False)
-            print(f"Pasien '{nama_pasien}' telah check-in ke kamar {nomor_kamar}.")
+        indeks = kamar.index[0]
+        if df_rawat_inap.at[indeks, "Status"] == "Kosong":
+            df_rawat_inap.at[indeks, "Status"] = "Terisi"
+            df_rawat_inap.at[indeks, "Pasien"] = nik_pasien
+            df_rawat_inap.to_csv("data_kamar.csv", index=False)
+            print(f"Pasien '{nik_pasien}' telah check-in ke kamar {nomor_kamar}.")
         else:
             print(f"Kamar {nomor_kamar} sudah terisi.")
     else:
         print("Nomor kamar tidak valid.")
 
-def atur_resep_obat():
+def atur_resep_obat(nik_pasien):
     clear_screen()
-    obat = input("Masukkan nama obat yang diresepkan: ")
+    df_queue = pd.read_csv("queue.csv")
+
+    total_obat = []
+
+    while True:
+        obat = input("Masukkan nama obat yang diresepkan: ")
+        print("Apakah anda ingin menambahkan obat lain? (y/n)")
+        total_obat.append(obat)
+        lanjut = getch()
+        if lanjut == "y":
+            continue
+        elif lanjut == "n":
+            break
+
     dosis = input("Masukkan dosis obat: ")
     durasi = input("Masukkan durasi penggunaan obat (misal: 5 hari): ")
 
-    print(f"Resep obat untuk pasien: {obat}, Dosis: {dosis}, Durasi: {durasi} telah dicatat.")
+    print(f"Resep obat untuk pasien: {', '.join(total_obat)}, Dosis: {dosis}, Durasi: {durasi} telah dicatat.")
 
+    biaya_total = len(total_obat) * 5000
+    df_queue.loc[df_queue["Nik"] == nik_pasien, "obat"] = biaya_total
+    df_queue.to_csv("queue.csv", index=False)
+    pause()
 
-def dokter_menu(x):
-    login_dokter(x)
-    pilihan = getch()
+def dokter_menu(dokter):
+    clear_screen()
 
     while True:
-        clear_screen()
         print("\nMenu:")
         print("1. Lihat dan Edit Jadwal Dokter")
         print("2. Mendiagnosa Pasien")
+        print("")
         print("Tekan ESC untuk keluar")
-        
+
+        pilihan = getch()
         if pilihan == "1":
-            lihat_dan_edit_jadwal(x)
+            lihat_dan_edit_jadwal(dokter)
         elif pilihan == "2":
             diagnosa_pasien()
         elif pilihan == "\x1b" :
             break
-        login(keyring_path='keyring.csv')
 
 # jaga jaga buat debug biar gk login melulu
 if __name__ == "__main__":

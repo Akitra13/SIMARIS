@@ -1,3 +1,42 @@
 2024-12-05 18:14:23 - INFO - User Login - username: dhani, role: dokter
 2024-12-05 18:18:51 - INFO - User Login - username: dhani, role: dokter
 2024-12-05 18:20:08 - ERROR - Unexpected Error: 'utf-8' codec can't decode byte 0xe0 in position 0: unexpected end of data
+2024-12-05 20:01:04 - INFO - User Login - username: dhani, role: dokter
+2024-12-05 21:34:54 - INFO - User Login - username: dhani, role: dokter
+2024-12-05 21:38:26 - INFO - User Login - username: dhani, role: dokter
+2024-12-05 21:39:38 - INFO - User Login - username: dhani, role: dokter
+2024-12-05 21:40:51 - INFO - User Login - username: dhani, role: dokter
+2024-12-05 21:41:47 - INFO - User Login - username: dhani, role: dokter
+2024-12-05 21:43:39 - INFO - User Login - username: dhani, role: dokter
+2024-12-05 21:45:03 - INFO - User Login - username: dhani, role: dokter
+2024-12-05 21:46:30 - INFO - User Login - username: dhani, role: dokter
+2024-12-05 21:47:28 - INFO - User Login - username: dhani, role: dokter
+2024-12-05 21:47:58 - INFO - User Login - username: dhani, role: dokter
+2024-12-05 21:49:33 - INFO - User Login - username: dhani, role: dokter
+2024-12-05 21:50:40 - ERROR - Unexpected Error: atur_resep_obat() missing 1 required positional argument: 'nik_pasien'
+2024-12-05 21:52:05 - INFO - User Login - username: dhani, role: dokter
+2024-12-05 21:52:48 - ERROR - Unexpected Error: atur_resep_obat() missing 1 required positional argument: 'nik_pasien'
+2024-12-05 21:57:45 - INFO - User Login - username: dhani, role: dokter
+2024-12-05 21:59:25 - ERROR - Unexpected Error: 'nik'
+2024-12-05 22:25:20 - INFO - User Login - username: dhani, role: dokter
+2024-12-05 22:26:47 - INFO - User Login - username: dhani, role: dokter
+2024-12-05 22:27:06 - ERROR - Unexpected Error: 'nik'
+2024-12-05 22:27:50 - INFO - User Login - username: dhani, role: dokter
+2024-12-05 22:28:01 - ERROR - Unexpected Error: 'name'
+2024-12-05 22:28:31 - INFO - User Login - username: dhani, role: dokter
+2024-12-05 22:28:35 - ERROR - Unexpected Error: 'umur'
+2024-12-05 22:29:05 - INFO - User Login - username: dhani, role: dokter
+2024-12-05 22:29:30 - ERROR - Unexpected Error: 'name'
+2024-12-05 22:30:27 - INFO - User Login - username: dhani, role: dokter
+2024-12-05 22:32:58 - INFO - User Login - username: dhani, role: dokter
+2024-12-05 22:35:49 - INFO - User Login - username: dhani, role: dokter
+2024-12-05 22:41:15 - INFO - User Login - username: dhani, role: dokter
+2024-12-05 22:41:50 - INFO - User Login - username: dhani, role: dokter
+2024-12-05 22:42:48 - INFO - User Login - username: dhani, role: dokter
+2024-12-05 22:44:53 - INFO - User Login - username: dhani, role: dokter
+2024-12-05 22:46:45 - INFO - User Login - username: dhani, role: dokter
+2024-12-05 22:46:45 - ERROR - Unexpected Error: login_dokter() missing 1 required positional argument: 'username'
+2024-12-05 22:47:14 - INFO - User Login - username: dhani, role: dokter
+2024-12-05 22:50:48 - INFO - User Login - username: dhani, role: dokter
+2024-12-05 22:51:34 - INFO - User Login - username: dhani, role: dokter
+2024-12-05 23:45:36 - INFO - User Login - username: dhani, role: dokter
