@@ -1,1 +1,54 @@
 2024-12-05 18:11:25 - INFO - User Login - username: adi, role: admin
+2024-12-06 01:45:31 - INFO - User Login - username: adi, role: admin
+2024-12-06 01:45:31 - ERROR - Unexpected Error: main_menu() missing 1 required positional argument: 'user'
+2024-12-06 01:49:54 - INFO - User Login - username: adi, role: admin
+2024-12-06 01:49:54 - ERROR - Unexpected Error: main_menu() missing 1 required positional argument: 'user'
+2024-12-06 01:59:13 - INFO - User Login - username: adi, role: admin
+2024-12-06 01:59:13 - ERROR - Unexpected Error: main_menu() missing 1 required positional argument: 'user'
+2024-12-06 02:03:42 - INFO - User Login - username: adi, role: admin
+2024-12-06 02:03:42 - ERROR - Unexpected Error: main_menu() missing 1 required positional argument: 'user'
+2024-12-06 02:05:27 - INFO - User Login - username: adi, role: admin
+2024-12-06 02:05:27 - ERROR - Unexpected Error: main_menu() missing 1 required positional argument: 'user'
+2024-12-06 02:06:20 - INFO - User Login - username: adi, role: admin
+2024-12-06 02:06:20 - ERROR - Unexpected Error: main_menu() missing 1 required positional argument: 'user'
+2024-12-06 02:07:17 - INFO - User Login - username: adi, role: admin
+2024-12-06 02:07:17 - ERROR - Unexpected Error: main_menu() missing 1 required positional argument: 'user'
+2024-12-06 02:09:21 - INFO - User Login - username: adi, role: admin
+2024-12-06 02:09:21 - ERROR - Unexpected Error: main_menu() missing 1 required positional argument: 'user'
+2024-12-06 02:12:39 - INFO - User Login - username: adi, role: admin
+2024-12-06 02:12:39 - ERROR - Unexpected Error: main_menu() missing 1 required positional argument: 'user'
+2024-12-06 02:13:06 - INFO - User Login - username: adi, role: admin
+2024-12-06 02:13:06 - ERROR - Unexpected Error: main_menu() missing 1 required positional argument: 'user'
+2024-12-06 02:18:51 - INFO - User Login - username: adi, role: admin
+2024-12-06 02:18:51 - ERROR - Unexpected Error: main_menu() missing 1 required positional argument: 'user'
+2024-12-06 02:21:59 - INFO - User Login - username: adi, role: admin
+2024-12-06 02:21:59 - ERROR - Unexpected Error: main_menu() missing 1 required positional argument: 'user'
+2024-12-06 02:26:34 - INFO - User Login - username: adi, role: admin
+2024-12-06 02:27:48 - INFO - User Login - username: adi, role: admin
+2024-12-06 03:07:53 - INFO - User Login - username: adi, role: admin
+2024-12-06 03:07:59 - ERROR - Unexpected Error: show_data_pasien_menu() takes 0 positional arguments but 1 was given
+2024-12-06 03:08:11 - INFO - User Login - username: adi, role: admin
+2024-12-06 03:08:13 - ERROR - Unexpected Error: show_data_pasien_menu() takes 0 positional arguments but 1 was given
+2024-12-06 03:11:00 - INFO - User Login - username: adi, role: admin
+2024-12-06 03:11:03 - ERROR - Unexpected Error: data_pasien_menu() takes 0 positional arguments but 1 was given
+2024-12-06 03:11:37 - INFO - User Login - username: adi, role: admin
+2024-12-06 03:11:47 - INFO - opened doctor schedule
+2024-12-06 03:12:09 - INFO - User Login - username: adi, role: admin
+2024-12-06 03:16:15 - INFO - User Login - username: adi, role: admin
+2024-12-06 03:16:18 - ERROR - Unexpected Error: handle_data_pasien() takes 0 positional arguments but 1 was given
+2024-12-06 03:17:53 - INFO - User Login - username: adi, role: admin
+2024-12-06 03:18:28 - ERROR - Unexpected Error: show_remove_patient() missing 1 required positional argument: 'logger'
+2024-12-06 03:24:15 - INFO - User Login - username: adi, role: admin
+2024-12-06 03:27:03 - INFO - User Login - username: adi, role: admin
+2024-12-06 03:30:07 - INFO - User Login - username: adi, role: admin
+2024-12-06 03:30:43 - INFO - User Login - username: adi, role: admin
+2024-12-06 03:40:41 - INFO - User Login - username: adi, role: admin
+2024-12-06 03:40:53 - INFO - Patient Removed Successfully - Index: 2, Removed Patient Details: {'Nama': 'Dhani', 'Nik': 111122223333, 'umur': 19, 'date': '12-06 03:06', 'diagnosa': nan, 'obat': nan, 'ruangan': nan}
+2024-12-06 03:41:54 - INFO - User Login - username: adi, role: admin
+2024-12-06 03:42:01 - INFO - Patient Removed Successfully - Index: 1, Removed Patient Details: {'Nama': 'Dhani', 'Nik': 111122223333, 'umur': 19, 'date': '12-06 03:05', 'diagnosa': nan, 'obat': nan, 'ruangan': nan}
+2024-12-06 03:43:39 - INFO - User Login - username: adi, role: admin
+2024-12-06 03:44:04 - INFO - Patient Added to Queue - Name: dhani, NIK: 0000111122223333, Umur: 19, Time: 12-06 03:44
+2024-12-06 06:54:33 - INFO - User Login - username: adi, role: admin
+2024-12-06 06:59:30 - INFO - User Login - username: adi, role: admin
+2024-12-06 07:00:13 - INFO - User Login - username: adi, role: admin
+2024-12-06 07:22:16 - INFO - User Login - username: adi, role: admin

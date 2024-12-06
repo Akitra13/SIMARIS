@@ -1,11 +1,11 @@
-Nomor Kamar,Nama Kamar,Status,Nama Pasien
-101,Azalea,Terisi,Kosong
-102,Begonia,Kosong,Kosong
-103,Camellia,Kosong,Kosong
-104,Dandelion,Kosong,Kosong
-105,Edelweiss,Kosong,Kosong
-106,Freesia,Kosong,Kosong
-107,Gardenia,Kosong,Kosong
-108,Hisbicus,Kosong,Kosong
-201,Iris,Kosong,Kosong
-202,Jasmine,Kosong,Kosong
+Nomor Kamar,Nama Kamar,Status
+1,Azalea,Kosong
+2,Begonia,Kosong
+3,Camellia,Kosong
+4,Dandelion,Kosong
+5,Edelweiss,Kosong
+6,Freesia,Kosong
+7,Gardenia,Kosong
+8,Hisbicus,Kosong
+9,Iris,Kosong
+10,Jasmine,Kosong
